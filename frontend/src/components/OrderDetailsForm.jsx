@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import axios from 'axios';
 
 const OrderDetailsForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     address: '',
     contactNumber: '',
-    sets: 0,
-    paymentDetails: ''
+    packs: 0,
+    utrRef: ''
   });
 
   const [totalPayment, setTotalPayment] = useState(0);
@@ -17,22 +18,32 @@ const OrderDetailsForm = () => {
     console.log(name, value);
     setFormData({ ...formData, [name]: value });
 
-    if (name === 'sets') {
-      const sets = +value;
-      setTotalPayment(sets * 120); // Assuming each set costs 120 rupees
+    if (name === 'packs') {
+      const packs = +value;
+      setTotalPayment(packs * 120); // Assuming each set costs 120 rupees
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
+    const dataSubmit = async () => {
+      try{
+        const res = await axios.post('http://localhost:1001/api/order/neworder', formData);
+        console.log("res : ", res);
+      }
+      catch(err){
+        console.log(err);
+      }
+    };
+    dataSubmit();
+    
     setFormData({
       name: '',
       address: '',
       contactNumber: '',
-      sets: 0,
-      paymentDetails: ''
+      packs: 0,
+      utrRef: ''
     });
     setTotalPayment(0);
   };
@@ -81,24 +92,24 @@ const OrderDetailsForm = () => {
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formSets" className='my-3'>
-                  <Form.Label>Number of Sets</Form.Label>
+                <Form.Group controlId="formpacks" className='my-3'>
+                  <Form.Label>Number of packs</Form.Label>
                   <Form.Control
                     type="number"
-                    name="sets"
-                    value={formData.sets}
+                    name="packs"
+                    value={formData.packs}
                     onChange={handleChange}
-                    placeholder="Enter number of sets"
+                    placeholder="Enter number of packs"
                     required
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formPaymentDetails" className='my-3'>
+                <Form.Group controlId="formUtrRef" className='my-3'>
                   <Form.Label>Payment Details</Form.Label>
                   <Form.Control
                     type="text"
-                    name="paymentDetails"
-                    value={formData.paymentDetails}
+                    name="utrRef"
+                    value={formData.utrRef}
                     onChange={handleChange}
                     placeholder="Enter payment details"
                     required

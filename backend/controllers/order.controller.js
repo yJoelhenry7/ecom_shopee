@@ -1,3 +1,4 @@
+
 import { db } from "../firebase.js";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
@@ -15,15 +16,31 @@ const generateUniqueId = async (orderCollectionRef) => {
 };
 
 export const order = async (req, res) => {
-    const { name, address, contactnumber, packs, utrref } = req.body;
+    const { name, address, contactNumber, packs, utrRef } = req.body;
     const orderCollectionRef = collection(db, "orders");
 
     try {
         const uniqueId = await generateUniqueId(orderCollectionRef);
-        const docRef = await addDoc(orderCollectionRef, { id: uniqueId, name, address, contactnumber, packs, utrref });
+        const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, address, contactNumber, packs, utrRef});
         return res.json({ id: docRef.id, message: "Order added successfully" });
     } catch (error) {
         console.error("Error in adding document: ", error);
         return res.status(500).json({ error: "Failed to add order" });
     }
 };
+
+export const getAllOrders=async(req,res)=>{
+    try {
+        const orderCollectionRef = collection(db, "orders");
+        const orders= await getDocs(orderCollectionRef);
+        let arr=[];
+        orders.docs.map((doc)=>{
+            arr.push(doc.data());
+        })
+        console.log(arr);
+        return res.status(200).json({arr});
+    } catch (error) {
+        console.error("Error in getting orders: ", error);
+        return res.status(500).json({ error: "Failed to fetch orders" });
+    }
+}
