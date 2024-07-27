@@ -1,5 +1,52 @@
 
-import { db } from "../firebase.js";
+// import { db } from "../firebase.js";
+// import { collection, addDoc, getDocs } from "firebase/firestore";
+
+// const generateUniqueId = async (orderCollectionRef) => {
+//     let id;
+//     let isUnique = false;
+
+//     while (!isUnique) {
+//         id = Math.floor(1000 + Math.random() * 9000);
+//         const qS = await getDocs(orderCollectionRef);
+//         isUnique = ! qS.docs.some(doc => doc.data().id === id);
+//     }
+
+//     return id;
+// };
+
+// export const order = async (req, res) => {
+//     const { name, address, contactNumber, packs, utrRef } = req.body;
+//     const orderCollectionRef = collection(db, "orders");
+
+//     try {
+//         const uniqueId = await generateUniqueId(orderCollectionRef);
+//         const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, address, contactNumber, packs, utrRef});
+//         return res.json({ id: docRef.id, message: "Order added successfully" });
+//     } catch (error) {
+//         console.error("Error in adding document: ", error);
+//         return res.status(500).json({ error: "Failed to add order" });
+//     }
+// };
+
+// export const getAllOrders=async(req,res)=>{
+//     try {
+//         const orderCollectionRef = collection(db, "orders");
+//         const orders= await getDocs(orderCollectionRef);
+//         let arr=[];
+//         orders.docs.map((doc)=>{
+//             arr.push(doc.data());
+//         })
+//         console.log(arr);
+//         return res.status(200).json({arr});
+//     } catch (error) {
+//         console.error("Error in getting orders: ", error);
+//         return res.status(500).json({ error: "Failed to fetch orders" });
+//     }
+// }
+
+
+import { db,app} from "../firebase.js";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const generateUniqueId = async (orderCollectionRef) => {
@@ -16,12 +63,12 @@ const generateUniqueId = async (orderCollectionRef) => {
 };
 
 export const order = async (req, res) => {
-    const { name, address, contactNumber, packs, utrRef } = req.body;
+    const { name, address, contactNumber, packs, utrRef,utrImg} = req.body;
+    console.log({ name, address, contactNumber, packs, utrRef,utrImg});
     const orderCollectionRef = collection(db, "orders");
-
     try {
         const uniqueId = await generateUniqueId(orderCollectionRef);
-        const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, address, contactNumber, packs, utrRef});
+        const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, address, contactNumber, packs, utrRef,utrImg});
         return res.json({ id: docRef.id, message: "Order added successfully" });
     } catch (error) {
         console.error("Error in adding document: ", error);
