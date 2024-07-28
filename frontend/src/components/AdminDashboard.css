@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 5rem;
-
+    width: 100%;
   }
   
   .row {
@@ -32,7 +32,7 @@
     width: 100%;
     margin-bottom: 1rem;
     color: #212529;
-    border-collapse: collapse;
+
   }
   
   .table th, .table td {
@@ -40,16 +40,6 @@
     vertical-align: top;
     border-top: 1px solid #dee2e6;
   }
-  
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  
-  .table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.075);
-  }
-  
-
   
   .btn {
     display: inline-block;
