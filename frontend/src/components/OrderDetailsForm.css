@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 5rem;
-    
+
   }
   
   .row {
@@ -43,6 +43,7 @@
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-bottom: 5px;
   }
   
   .form-control:focus {

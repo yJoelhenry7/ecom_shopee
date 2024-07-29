@@ -63,12 +63,12 @@ const generateUniqueId = async (orderCollectionRef) => {
 };
 
 export const order = async (req, res) => {
-    const { name, address, contactNumber, packs, utrRef,utrImg} = req.body;
-    console.log({ name, address, contactNumber, packs, utrRef,utrImg});
+    const { name, contactNumber, packs, utrRef,utrImg,dNo,street,area,price} = req.body;
+    console.log({ name, contactNumber, packs, utrRef,utrImg,dNo,street,area,price});
     const orderCollectionRef = collection(db, "orders");
     try {
         const uniqueId = await generateUniqueId(orderCollectionRef);
-        const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, address, contactNumber, packs, utrRef,utrImg});
+        const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, contactNumber, packs, utrRef,utrImg,dNo,street,area,price});
         return res.json({ id: docRef.id, message: "Order added successfully" });
     } catch (error) {
         console.error("Error in adding document: ", error);
