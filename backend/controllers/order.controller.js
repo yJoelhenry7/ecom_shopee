@@ -69,7 +69,7 @@ export const order = async (req, res) => {
     try {
         const uniqueId = await generateUniqueId(orderCollectionRef);
         const docRef = await addDoc(orderCollectionRef, { id: uniqueId,name, contactNumber, packs, utrRef,utrImg,dNo,street,area,price});
-        return res.json({ id: docRef.id, message: "Order added successfully" });
+        return res.json({ id: uniqueId, message: "Order added successfully" });
     } catch (error) {
         console.error("Error in adding document: ", error);
         return res.status(500).json({ error: "Failed to add order" });

@@ -27,7 +27,7 @@ const OrderDetailsForm = () => {
   });
 
   const isFormValid = () => {
-    return formData.name && formData.contactNumber && formData.packs > 0 && formData.utrRef && image && formData.dNo;
+    return formData.name && formData.contactNumber && formData.packs > 0 && formData.utrRef && image  && formData.dNo;
   };
 
   const handleUpload = () => {
@@ -87,6 +87,8 @@ const OrderDetailsForm = () => {
       const updatedFormData = { ...formData, utrImg: imageUrl };
       const res = await axios.post('http://localhost:1001/api/order/neworder', updatedFormData);
       console.log('res:', res);
+      const id = res.data.id; 
+      console.log('res:', res.data.id);
       alert('Order placed successfully');
       setFormData({
         name: '',
@@ -102,7 +104,7 @@ const OrderDetailsForm = () => {
       setTotalPayment(0);
       setImage(null);
       setImagePreviewUrl(null);
-      navigate("/order-confirmed");
+      navigate("/order-confirmed", { state: { id: id } });
     } catch (err) {
       console.error(err);
       alert('Error placing order. Please try again.');

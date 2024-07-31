@@ -7,10 +7,11 @@ export const UserContext = createContext(null)
 const UserContextProvider = (props) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const url = "http://localhost:1001/";
   const contextValue = {
     isAuthenticated,
     setIsAuthenticated,
+    url
   }
 
   return (

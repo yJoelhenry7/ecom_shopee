@@ -9,7 +9,9 @@ const GenerateReceipt = () => {
   const location = useLocation();
   const { id } = location.state || {};
 
- 
+ useEffect(()=>{
+  console.log("id : ",id);
+ },[id])
 
   const handlePrint = () => {
     window.print();

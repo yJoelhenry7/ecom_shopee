@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 5rem;
-    width: 100%;
+    min-width: 100vh;
     min-height: 150vh;
     padding: 2rem 5rem;
     background: linear-gradient(#ff5f6d,#ffc371) ;
@@ -20,7 +20,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     overflow: hidden;
-    width: 100%;
+    min-width: 100vh;
     background-color: white;
     /* max-width: 1200px; */
   }
@@ -56,7 +56,7 @@
   }
   
   .admin-dashboard-table {
-    width: 100%;
+    min-width: 100vh;
     margin-bottom: 1rem;
     color: #212529;
 
@@ -119,3 +119,16 @@
     border-color: #0062cc;
   }
 
+  .admin-dashboard-filter-container {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  .admin-dashboard-input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+  }
+  

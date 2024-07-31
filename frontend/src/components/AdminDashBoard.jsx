@@ -1,29 +1,55 @@
-
-
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./AdminDashboard.css";
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
+import { UserContext } from './context/UserContext';
 
 const AdminDashboard = () => {
 
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+  const [filterArea, setFilterArea] = useState('');
   const navigate = useNavigate();
+  const {url} = useContext(UserContext)
 
+  // Fetch all orders from the database
   useEffect(() => {
-    // Fetch all orders from the database
     const fetchOrders = async () => {
       try {
-        const res = await axios.get('http://localhost:1001/api/order/getallorders');
-        console.log("res data : ", res.data.arr);
+        const res = await axios.get(url+'api/order/getallorders');
         setOrders(res?.data.arr);
+        setFilteredOrders(res?.data.arr); // Initialize filteredOrders with all orders
       } catch (error) {
         console.log(error);
       }
     };
     fetchOrders();
   }, []);
+
+  // Filter orders based on address and area
+  const filterOrders = () => {
+    const filtered = orders.filter(order => {
+      return (
+        (filterArea ? order.area.toLowerCase().includes(filterArea.toLowerCase()) : true)
+      );
+    });
+    setFilteredOrders(filtered);
+  };
+
+
+  const handleAreaChange = (e) => {
+    setFilterArea(e.target.value);
+  };
+
+  const handleSearch = () => {
+    filterOrders();
+  };
+
+  const handleClearSearch = () => {
+    setFilterArea('');
+    setFilteredOrders(orders); // Reset to show all orders
+  };
 
   const generateReceiptHandler = (id) => {
     navigate('/generate-receipt', { state: { id } });
@@ -78,6 +104,21 @@ const AdminDashboard = () => {
           <div className="admin-dashboard-card-body">
             <div className="admin-dashboard-header">
               <h2 className="admin-dashboard-text-center">Admin Dashboard</h2>
+              <div className="admin-dashboard-filter-container">
+                <input
+                  type="text"
+                  placeholder="Filter by Area"
+                  value={filterArea}
+                  onChange={handleAreaChange}
+                  className="admin-dashboard-input"
+                />
+                <button onClick={handleSearch} className="admin-dashboard-btn btn-primary">
+                  Search
+                </button>
+                <button onClick={handleClearSearch} className="admin-dashboard-btn btn-secondary">
+                  Clear
+                </button>
+              </div>
               <button onClick={exportToExcel} className="admin-dashboard-btn btn-success">
                 Export to Excel
               </button>
@@ -87,8 +128,8 @@ const AdminDashboard = () => {
                 <tr>
                   <th>Id</th>
                   <th>Name</th>
-                  <th>Contact Number</th>
                   <th>Address</th>
+                  <th>Contact Number</th>
                   <th>Packs</th>
                   <th>Price</th>
                   <th>Payment Status</th>
@@ -97,12 +138,12 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order, index) => (
+                {filteredOrders.map((order, index) => (
                   <tr key={index}>
                     <td>{order.id}</td>
                     <td>{order.name}</td>
+                    <td>{order.dNo},{order.street},{order.area}</td>
                     <td>{order.contactNumber}</td>
-                    <td>{order.dNo} {order.street} {order.area}</td>
                     <td>{order.packs}</td>
                     <td>{order.price}</td>
                     <td>{order.paymentStatus === null ? "Paid" : "Not Paid"}</td>
@@ -110,9 +151,6 @@ const AdminDashboard = () => {
                     <td className='admin-dashboard-tbody-btn'>
                       <button onClick={() => generateReceiptHandler(order.id)} className="admin-dashboard-btn btn-success">
                         Generate Receipt
-                      </button>
-                      <button className="admin-dashboard-btn btn-primary">
-                        Print Receipt
                       </button>
                     </td>
                   </tr>
@@ -127,4 +165,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-
