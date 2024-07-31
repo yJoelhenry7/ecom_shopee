@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./AdminSignIn.css"
 import { useNavigate } from 'react-router-dom';
 
-const AdminSignIn = () => {
+const AdminSignIn = ({setIsAuthenticated}) => {
 
     const navigate = useNavigate();
 
@@ -22,6 +22,7 @@ const AdminSignIn = () => {
 
         if(formData.email === "admin@gmail.com" && formData.password === "admin!1234"){
             alert("Successfull Login");
+            setIsAuthenticated(true);
             setFormData({
                 email: '',
                 password: ''

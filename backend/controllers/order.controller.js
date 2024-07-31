@@ -91,3 +91,23 @@ export const getAllOrders=async(req,res)=>{
         return res.status(500).json({ error: "Failed to fetch orders" });
     }
 }
+
+export const getOrder=async(req,res)=>{
+    const id=req.params.id;
+    console.log(id);
+    try {
+        const orderCollectionRef=collection(db,"orders");
+        const orders=await getDocs(orderCollectionRef);
+        let arr=[];
+        orders.docs.map((doc)=>{
+            if(doc.data().id==id){
+                arr.push(doc.data());
+            }
+        })
+        console.log(arr);
+        return res.status(200).json({arr});
+    } catch (error) {
+        console.error("Error in getting order: ", error);
+        return res.status(500).json({ error: "Failed to fetch order" });
+    }
+} 
