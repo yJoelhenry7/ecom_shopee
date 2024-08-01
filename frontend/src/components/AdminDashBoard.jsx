@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import "./AdminDashboard.css";
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
-import { UserContext } from './context/UserContext';
+import { useAuth } from './context/UserContext';
 
 const AdminDashboard = () => {
 
@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [filterArea, setFilterArea] = useState('');
   const navigate = useNavigate();
-  const {url} = useContext(UserContext)
+  const {url} = useAuth();
 
   // Fetch all orders from the database
   useEffect(() => {
