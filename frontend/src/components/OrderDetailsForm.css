@@ -2,7 +2,9 @@
   display: flex;
   justify-content: center;
   margin-bottom: 5rem;
-  color: white;
+  /* color: white; */
+  color: rgba(0, 0, 0, 0.8);
+  font-family: Arial, sans-serif;
 }
 
 .container-overlay {
@@ -10,10 +12,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 150vh;
-  /* background: rgba(0, 0, 0, 0.5); */
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), url('https://imgs.search.brave.com/cTuAhZgOS7XV9Gg8r5yCMgqvtaLFxftbh2TJRWYk3uk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA2Lzk4LzMzLzU0/LzM2MF9GXzY5ODMz/NTQ4Ml9JR3BJUnBZ/WGgycFY4Zno0cEpt/NTlPbEpZSzFPQjAx/MC5qcGc') no-repeat center center/cover fixed;
-  filter: blur(5px);
+  min-height: 142vh;
+  background: url('../assets/order-bg.jpg') fixed;
   z-index: -1;
 }
 
@@ -28,14 +28,22 @@
   width: 100%;
 }
 
-.card {
+/* .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  overflow: hidden;
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  background-color: rgb(255, 38, 0);
+  overflow: hidden; */
+/* background-color: rgba(255, 255, 255, 0.8); */
+/* background-color: rgb(255, 38, 0);
   backdrop-filter: blur(20px);
   background: transparent;
+} */
+
+.card {
+  margin-top: 3rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .card-body {
@@ -44,34 +52,42 @@
 
 .container-text-center {
   text-align: center;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-  color:rgb(255, 76, 44);
+  /* margin-bottom: 2rem; */
+  /* margin-top: 2rem; */
+  color: rgb(255, 76, 44);
   font-size: 3rem;
   font-weight: bolder;
   font-family: cursive;
-  background: transparent;
+  /* background: transparent; */
   filter: brightness(1.5) contrast(1.5) saturate(1.5);
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
+  margin-top: 10px;
   font-weight: bold;
+  /* font-size: 1.2rem;
+  font-weight: bold; */
 }
 
-.form-group-address{
+.form-group-address {
   display: flex;
   justify-content: space-between;
   gap: 3px;
 }
 
 .form-control {
-  width: 100%;
+  /* width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 5px;
+  margin-bottom: 5px; */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .form-control:focus {
@@ -84,8 +100,7 @@
   margin-bottom: 1.5rem;
 }
 
-.btn-submit {
-
+/* .btn-submit {
   padding: 0.75rem;
   background: url('https://imgs.search.brave.com/2ZV1W3O2iPq-dojIK1FxvXPmOds4KDpzfbvAWUvpucY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2JjLzcy/L2Q0L2JjNzJkNDdh/NmNkODQyMjM2ZjQ0/NTM2NmIwYTYzZDA0/LmpwZw') center/cover;
   backdrop-filter: blur(20px);
@@ -116,15 +131,37 @@
   filter: brightness(1.5) grayscale(red);
   border-radius: 15px;
   background: linear-gradient(black, rgba(0,0,0,0.6));
-}
+} */
 
-.form-group-formpacks{
+.form-group-formpacks {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 0;
+  /* margin-left: 0; */
 }
 
-.form-group-formpacks input{
+.form-group-formpacks input {
   width: 50%;
+}
+
+.btn-submit,
+.btn-disabled {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #4CAF50;
+  /* Eco-friendly - green */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: monospace;
+}
+
+.btn-disabled{
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
 }

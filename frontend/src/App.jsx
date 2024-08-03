@@ -40,24 +40,27 @@
 
 // export default App
 
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
 import AdminDashboard from './components/AdminDashBoard'
 import OrderDetailsForm from './components/OrderDetailsForm'
 import AdminSignIn from './components/Admin/AdminSignIn'
 import GenerateReceipt from './components/Receipts/GenerateReceipt'
-import ProtectedRoute from './components/utils/ProtectedRoute'
 import OrderConfirmed from './components/Order/OrderConfirmed'
 import { useAuth } from './components/context/UserContext'
 import { useEffect } from 'react'
 
+
 function App() {
   const { isAuthenticated, loading } = useAuth();
+  const location = useLocation();
+  const path = window.location.pathname;
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("Path: ", path);
     console.log("Is authenticated: ", isAuthenticated);
-    if (!loading && !isAuthenticated) {
+    if (!loading && !isAuthenticated && (path === '/admin-dashboard' || path === '/admin-signin')) {
       navigate('/admin-signin');
     }
   }, [isAuthenticated, loading, navigate]);
@@ -80,3 +83,4 @@ function App() {
 }
 
 export default App;
+

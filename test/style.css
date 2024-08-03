@@ -1,0 +1,67 @@
+body {
+    /* background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20221107/pngtree-delicious-indian-food-tray-top-view-mouth-watering-south-delicacy-photo-image_40473976.jpg'); */
+    background: linear-gradient(to left,white,rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5), white),
+    url('https://png.pngtree.com/thumb_back/fw800/background/20221107/pngtree-delicious-indian-food-tray-top-view-mouth-watering-south-delicacy-photo-image_40473976.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.food-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.food-form h2 {
+    color: #ff6f61; /* Love - red/pink */
+    text-align: center;
+}
+
+.food-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.food-form input,
+.food-form textarea,
+.food-form select {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.food-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50; /* Eco-friendly - green */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.food-form button:hover {
+    background-color: #45a049;
+}
+
+.food-form input:focus,
+.food-form textarea:focus,
+.food-form select:focus {
+    border-color: #00bcd4; /* Trust - blue */
+    outline: none;
+}
