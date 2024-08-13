@@ -39,6 +39,10 @@
     text-decoration: none;
     margin-left: 3px;
   }
+
+  .btn-link{
+    font-size: 20px;
+  }
   
   .btn-home:hover {
     background-color: #218838;

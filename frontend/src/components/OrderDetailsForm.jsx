@@ -12,7 +12,7 @@ const OrderDetailsForm = () => {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
-  const [totalPayment, setTotalPayment] = useState(120);
+  const [totalPayment, setTotalPayment] = useState(451);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -65,7 +65,7 @@ const OrderDetailsForm = () => {
     const { name, value } = e.target;
     if (name === 'packs') {
       const packs = +value;
-      const total = packs * 120; // Assuming each set costs 120 units
+      const total = packs * 451; // Assuming each set costs 120 units
       setTotalPayment(total);
       setFormData({ ...formData, packs: packs, price: total });
     } else {
@@ -254,6 +254,7 @@ const OrderDetailsForm = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="formpacks">Number of packs</label>
+                  <p>Note:Each pack contains Poornalu-10,pulihora-1kg,Undralu-1kg,Chekari Pongal-0.5kg,Kesari-0.5kg,Guggilu-0.25kg</p>
                   <div className="form-group-formpacks">
                     <input
                       type="number"
@@ -271,7 +272,7 @@ const OrderDetailsForm = () => {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="formUtrRef">Payment Details</label>
+                  <label htmlFor="formUtrRef"><b>Payment Details</b>(PhonePay Number:9642139494)</label>
                   <input
                     type="text"
                     className="form-control"

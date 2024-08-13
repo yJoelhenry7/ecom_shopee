@@ -11,13 +11,13 @@ const AdminDashboard = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [filterArea, setFilterArea] = useState('');
   const navigate = useNavigate();
-  const {url} = useAuth();
+  const { url } = useAuth();
 
   // Fetch all orders from the database
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get(url+'api/order/getallorders');
+        const res = await axios.get(url + 'api/order/getallorders');
         setOrders(res?.data.arr);
         setFilteredOrders(res?.data.arr); // Initialize filteredOrders with all orders
       } catch (error) {
@@ -36,7 +36,6 @@ const AdminDashboard = () => {
     });
     setFilteredOrders(filtered);
   };
-
 
   const handleAreaChange = (e) => {
     setFilterArea(e.target.value);
@@ -98,66 +97,63 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard-container">
-      <div className="admin-dashboard-container-overlay"></div>
-      <div className="admin-dashboard-row ">
-        <div className="admin-dashboard-card ">
-          <div className="admin-dashboard-card-body">
-            <div className="admin-dashboard-header">
-              <h2 className="admin-dashboard-text-center">Admin Dashboard</h2>
-              <div className="admin-dashboard-filter-container">
-                <input
-                  type="text"
-                  placeholder="Filter by Area"
-                  value={filterArea}
-                  onChange={handleAreaChange}
-                  className="admin-dashboard-input"
-                />
-                <button onClick={handleSearch} className="admin-dashboard-btn btn-primary">
-                  Search
-                </button>
-                <button onClick={handleClearSearch} className="admin-dashboard-btn btn-secondary">
-                  Clear
-                </button>
-              </div>
+      <div className="admin-dashboard-card">
+        <div className="admin-dashboard-card-body">
+          <div className="admin-dashboard-header">
+            <h2 className="admin-dashboard-text-center">Admin Dashboard</h2>
+            <div className="admin-dashboard-filter-container">
+              <input
+                type="text"
+                placeholder="Filter by Area"
+                value={filterArea}
+                onChange={handleAreaChange}
+                className="admin-dashboard-input"
+              />
+              <button onClick={handleSearch} className="admin-dashboard-btn btn-primary">
+                Search
+              </button>
+              <button onClick={handleClearSearch} className="admin-dashboard-btn btn-secondary">
+                Clear
+              </button>
               <button onClick={exportToExcel} className="admin-dashboard-btn btn-success">
                 Export to Excel
               </button>
             </div>
-            <table cellPadding={15} border={2} cellSpacing={0} className="admin-dashboard-table">
-              <thead className="thead-dark">
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Address</th>
-                  <th>Contact Number</th>
-                  <th>Packs</th>
-                  <th>Price</th>
-                  <th>Payment Status</th>
-                  <th>Delivery Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredOrders.map((order, index) => (
-                  <tr key={index}>
-                    <td>{order.id}</td>
-                    <td>{order.name}</td>
-                    <td>{order.dNo},{order.street},{order.area}</td>
-                    <td>{order.contactNumber}</td>
-                    <td>{order.packs}</td>
-                    <td>{order.price}</td>
-                    <td>{order.paymentStatus === null ? "Paid" : "Not Paid"}</td>
-                    <td>{order.deliveryStatus === null ? "Delivered" : "Pending"}</td>
-                    <td className='admin-dashboard-tbody-btn'>
-                      <button onClick={() => generateReceiptHandler(order.id)} className="admin-dashboard-btn btn-success">
-                        Generate Receipt
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
+          <table cellPadding={15} border={2} cellSpacing={0} className="admin-dashboard-table">
+            <thead className="thead-dark">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Packs</th>
+                <th>Price</th>
+                <th>Payment Status</th>
+                <th>Delivery Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredOrders.map((order, index) => (
+                <tr key={index}>
+                  <td>{order.id}</td>
+                  <td>{order.name}</td>
+                  <td>{order.dNo},{order.street},{order.area}</td>
+                  <td>{order.contactNumber}</td>
+                  <td>{order.packs}</td>
+                  <td>{order.price}</td>
+                  <td>{order.paymentStatus === null ? "Paid" : "Not Paid"}</td>
+                  <td>{order.deliveryStatus === null ? "Delivered" : "Pending"}</td>
+                  <td className='admin-dashboard-tbody-btn'>
+                    <button onClick={() => generateReceiptHandler(order.id)} className="admin-dashboard-btn btn-success">
+                      Generate Receipt
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

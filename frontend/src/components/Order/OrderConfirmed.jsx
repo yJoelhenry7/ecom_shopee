@@ -25,9 +25,9 @@ const OrderConfirmed = () => {
       <div className="order-confirmed-card">
         <h2>Order Confirmed</h2>
         <p>Thank you for your order! Your order has been successfully placed.</p>
-        <Link className="btn-home" to="/">
+        <button onClick={() => navigate('/')} className="btn-home">
           Go to Home
-        </Link>
+        </button>
         <button className="btn-home" onClick={onGenerateReceiptHandler} >
             Generate Receipt
         </button>

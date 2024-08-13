@@ -49,7 +49,7 @@ import GenerateReceipt from './components/Receipts/GenerateReceipt'
 import OrderConfirmed from './components/Order/OrderConfirmed'
 import { useAuth } from './components/context/UserContext'
 import { useEffect } from 'react'
-
+import Home from './components/Home'
 
 function App() {
   const { isAuthenticated, loading } = useAuth();
@@ -72,7 +72,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<OrderDetailsForm />} />
+        <Route path="/" element={<Home/>}/>
+        <Route path="/orderdetailsform" element={<OrderDetailsForm />} />
         <Route path="/generate-receipt" element={<GenerateReceipt />} />
         <Route path="/order-confirmed" element={<OrderConfirmed />} />
         <Route path="/admin-signin" element={<AdminSignIn />} />
